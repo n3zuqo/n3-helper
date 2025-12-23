@@ -1,0 +1,804 @@
+:root {
+  --bg: #0b0e14;
+  --card: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --accent: #4fd1ff;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text-muted: #9ca3af;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden; /* ❗ убирает ползунок */
+  background: #000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  color: #fff;
+}
+
+/* ===== BACKGROUND IMAGE ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.85)),
+    url("bg/Nezuko-PNG-Images.png");
+
+  background-size: cover;
+  background-position: center;
+
+  z-index: -1;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* ===== APP ===== */
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+
+  overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+header {
+  position: relative;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.reset {
+  font-size: 18px;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.reset:active {
+  opacity: 1;
+}
+
+/* ===== TOTALS ===== */
+.totals {
+  display: flex;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.total-block {
+  flex: 1;
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: visible;
+}
+
+.label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.value {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.gross {
+  color: #cbd5e1;
+}
+
+.net {
+  color: var(--green);
+}
+
+/* ===== LIST ===== */
+.list {
+  margin-bottom: 120px; /* чтобы не перекрывалась кнопкой */
+  max-height: calc(100vh - 260px); 
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.row {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  animation: slideIn 0.25s ease-out;
+}
+
+.row.income {
+  color: var(--green);
+}
+
+.row.expense {
+  color: var(--red);
+}
+
+.row.timer {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== ACTION BUTTON ===== */
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 14px 0 80px;
+}
+
+.bottom-actions {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 78px;
+  z-index: 20;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.action-btn {
+  width: 100%;
+  border-radius: 18px;
+  padding: 15px 0;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== ADD BUTTON (GRADIENT + GLOW) ===== */
+.action-btn.add {
+  background: linear-gradient(135deg, #4fd1ff, #8b5cf6);
+  color: #000;
+}
+
+.action-btn.add::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  background: linear-gradient(135deg, #4fd1ff, #8b5cf6);
+  filter: blur(18px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.action-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===== MODAL ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  border-radius: 18px;
+  padding: 18px;
+  width: calc(100% - 32px);
+  max-width: 340px;
+  border: 1px solid var(--border);
+}
+
+.modal-title {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 14px;
+}
+
+#confirmBtn {
+  background: var(--accent);
+  color: #000;
+}
+
+#cancelBtn {
+  background: #1f2933;
+  color: #fff;
+}
+
+/* ===== TIMER CARD (PREMIUM) ===== */
+.timer-card {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-radius: 22px;
+  padding: 28px;
+  width: calc(100% - 32px);
+  max-width: 420px;
+  margin-bottom: 0;
+
+  text-align: center;
+  border: 1px solid var(--border);
+
+  box-shadow:
+    0 14px 40px rgba(0,0,0,0.75),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+/* ===== TIMER TITLE ===== */
+.timer-title {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  letter-spacing: 0.4px;
+}
+
+/* ===== TIMER TIME (FOCUS POINT) ===== */
+.timer-time {
+  font-size: 46px;
+  font-weight: 600;
+  margin-bottom: 26px;
+  letter-spacing: 1.5px;
+
+  color: #e5f6ff;
+  text-shadow:
+    0 0 22px rgba(79,209,255,0.45),
+    0 0 42px rgba(79,209,255,0.25);
+}
+
+/* ===== TIMER ACTIONS ===== */
+.timer-actions {
+  display: flex;
+  gap: 14px;
+}
+
+/* ===== BASE BUTTON ===== */
+.timer-btn {
+  flex: 1;
+  border-radius: 18px;
+  padding: 16px 0;
+
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+/* ===== START — ENERGY ===== */
+.timer-btn.start {
+  background: linear-gradient(135deg, #4fd1ff, #8b5cf6);
+  color: #000;
+
+  box-shadow:
+    0 0 26px rgba(79,209,255,0.45),
+    0 10px 26px rgba(0,0,0,0.65);
+}
+
+/* ===== STOP — CONTROL ===== */
+.timer-btn.stop {
+  background: rgba(255,255,255,0.08);
+  color: var(--red);
+
+  box-shadow:
+    inset 0 0 0 1px rgba(239,68,68,0.25),
+    0 8px 20px rgba(0,0,0,0.65);
+}
+
+/* ===== PRESS FEEDBACK ===== */
+.timer-btn:active {
+  transform: scale(0.96);
+  filter: brightness(1.05);
+}
+
+/* ===== SHINE EFFECT ===== */
+.timer-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+}
+
+
+.timer-btn:active::after {
+  animation: shine 0.6s ease forwards;
+}
+
+/* ===== NAV ===== */
+.bottom-nav {
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background: var(--card);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+  display: flex;
+  padding: 6px;
+  gap: 6px;
+  border: 1px solid var(--border);
+  z-index: 50;
+}
+
+.nav-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #9ca3af;
+  padding: 10px 0;
+  font-size: 13px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.nav-btn.active {
+  background: none;
+  box-shadow: none;
+  color: #fff;
+}
+
+/* ===== STATES ===== */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ===== TYPE CHOICE BUTTONS ===== */
+#typeModal .modal-actions button {
+  font-weight: 600;
+  border: none;
+  color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ДОХОД — ЗЕЛЁНАЯ */
+#chooseIncome {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+  box-shadow: 0 0 18px rgba(34,197,94,0.5);
+}
+
+/* РАСХОД — КРАСНАЯ */
+#chooseExpense {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+  box-shadow: 0 0 18px rgba(239,68,68,0.45);
+}
+
+/* ЛЁГКИЙ GLOW */
+#typeModal .modal-actions button::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  filter: blur(14px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+#chooseIncome::before {
+  background: linear-gradient(135deg, #22c55e, #4ade80);
+}
+
+#chooseExpense::before {
+  background: linear-gradient(135deg, #ef4444, #f87171);
+}
+
+/* НАЖАТИЕ */
+#typeModal .modal-actions button:active {
+  transform: scale(0.97);
+}
+
+/* ===== HOVER FEEDBACK (DESKTOP) ===== */
+@media (hover: hover) {
+
+  #typeModal .modal-actions button {
+    cursor: pointer;
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      filter 0.18s ease;
+  }
+
+  /* ОБЩИЙ HOVER */
+  #typeModal .modal-actions button:hover {
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.05);
+  }
+
+  /* ДОХОД — усиливаем зелёный glow */
+  #chooseIncome:hover {
+    box-shadow:
+      0 0 26px rgba(34,197,94,0.75),
+      0 8px 20px rgba(0,0,0,0.4);
+  }
+
+  /* РАСХОД — усиливаем красный glow */
+  #chooseExpense:hover {
+    box-shadow:
+      0 0 26px rgba(239,68,68,0.75),
+      0 8px 20px rgba(0,0,0,0.4);
+  }
+}
+
+/* ===== SHINE EFFECT (BUTTON GLOSS) ===== */
+#typeModal .modal-actions button {
+  position: relative;
+  overflow: hidden;
+}
+
+/* сам блик */
+#typeModal .modal-actions button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.45),
+    transparent
+  );
+  transform: skewX(-20deg);
+  opacity: 0;
+}
+
+/* ПК — при наведении */
+@media (hover: hover) {
+  #typeModal .modal-actions button:hover::after {
+    animation: shine 0.6s ease forwards;
+  }
+}
+
+/* Мобилка — при нажатии */
+#typeModal .modal-actions button:active::after {
+  animation: shine 0.6s ease forwards;
+}
+
+@keyframes shine {
+  from {
+    left: -60%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  to {
+    left: 130%;
+    opacity: 0;
+  }
+}
+
+/* ===== TYPE MODAL TITLE COLOR FEEDBACK ===== */
+#typeModal .modal-title {
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* зелёный заголовок */
+#typeModal.income-active .modal-title {
+  color: #22c55e;
+  text-shadow: 0 0 12px rgba(34,197,94,0.6);
+}
+
+/* красный заголовок */
+#typeModal.expense-active .modal-title {
+  color: #ef4444;
+  text-shadow: 0 0 12px rgba(239,68,68,0.6);
+}
+
+/* ===== BACKGROUND BLUR ON HOVER ===== */
+#typeModal .modal-content {
+  transition: backdrop-filter 0.25s ease, background 0.25s ease;
+}
+
+@media (hover: hover) {
+  #typeModal.income-active .modal-content,
+  #typeModal.expense-active .modal-content {
+    backdrop-filter: blur(22px);
+    background: rgba(20,20,20,0.85);
+  }
+}
+
+/* ===== CLEAN PREMIUM NET GLOW (STABLE) ===== */
+
+/* ===== SOFT PREMIUM GLOW (SMOOTH IN / OUT) ===== */
+
+.value {
+  position: relative;
+  z-index: 2;
+  transition: text-shadow 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* активное свечение */
+.value.glow-green {
+  text-shadow:
+    0 0 12px rgba(34,197,94,0.85),
+    0 0 26px rgba(34,197,94,0.45);
+}
+
+.value.glow-red {
+  text-shadow:
+    0 0 12px rgba(239,68,68,0.85),
+    0 0 26px rgba(239,68,68,0.45);
+}
+
+/* плавное ЗАТУХАНИЕ ТОЛЬКО GLOW */
+.value.glow-fade {
+  text-shadow: none;
+}
+
+/* ===== SOFT CARD GLOW ===== */
+.total-block {
+  transition: box-shadow 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* активное свечение */
+.total-block.card-glow-green {
+  box-shadow:
+    0 0 26px rgba(34,197,94,0.35),
+    0 10px 30px rgba(0,0,0,0.6);
+}
+
+.total-block.card-glow-red {
+  box-shadow:
+    0 0 26px rgba(239,68,68,0.35),
+    0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* ===== iOS GLASS SEGMENT CONTROL ===== */
+
+.nav-indicator {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: calc(50% - 8px);
+  height: calc(100% - 12px);
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.15);
+
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+
+  pointer-events: none; /* 🔥 ВАЖНО */
+}
+
+/* плавающая стеклянная плашка */
+.nav-indicator {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: calc(50% - 8px);
+  height: calc(100% - 12px);
+  border-radius: 14px;
+  .nav-indicator {
+  pointer-events: none;
+}
+
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.15);
+
+  transition:
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* кнопки */
+.nav-btn {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.nav-btn.active {
+  color: #fff;
+}
+
+/* ===== REAL HIDE FOR TIMER BUTTONS ===== */
+.timer-actions .hidden {
+  display: none;
+}
+
+#timerScreen {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding-bottom: 140px; /* ⬅️ ВАЖНО */
+}
+
+/* ===== CIRCULAR TIMER ===== */
+
+.timer-circle {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== ROUND GLOW AROUND TIMER CIRCLE ===== */
+.timer-circle::before {
+  content: '';
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(79, 209, 255, 0.35) 0%,
+    rgba(139, 92, 246, 0.25) 40%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.progress-ring {
+  transform: rotate(-90deg); /* старт сверху, как в iOS */
+}
+
+.progress-ring__progress {
+  stroke-dasharray: 440;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.timer-time {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 36px;
+  font-weight: 600;
+  color: #e5f6ff;
+
+  text-shadow:
+    0 0 22px rgba(79,209,255,0.5),
+    0 0 40px rgba(79,209,255,0.25);
+}
+
+/* ===== TIMER PULSE (LAST 10 SEC) ===== */
+
+.timer-circle.pulse {
+  animation: timerPulse 1s ease-in-out infinite;
+}
+
+.timer-circle.pulse::before {
+  opacity: 1;
+}
+
+@keyframes timerPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* SVG таймера не должен блокировать клики */
+.timer-circle,
+.timer-circle svg,
+.progress-ring,
+.progress-ring__progress {
+  pointer-events: none;
+}
