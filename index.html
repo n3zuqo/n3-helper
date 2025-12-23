@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>n3 helper</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- Шапка -->
+  <header>
+    <div class="title">n3 helper</div>
+    <div class="reset">♻️</div>
+  </header>
+
+  <!-- ЭКРАН ЗАРАБОТКА -->
+  <div id="earnScreen">
+
+    <div class="totals">
+      <div class="total-block">
+        <div class="label">Общий</div>
+        <div class="value gross">0 $</div>
+      </div>
+
+      <div class="total-block">
+        <div class="label">Чистый</div>
+        <div class="value net">0 $</div>
+      </div>
+    </div>
+
+    <div class="list" id="list"></div>
+
+    <!-- Кнопки действий -->
+<div class="action-buttons">
+  <button id="incomeBtn" class="action-btn income">+ Доход</button>
+  <button id="expenseBtn" class="action-btn expense">− Расход</button>
+</div>
+
+
+  </div>
+
+  <!-- ЭКРАН ТАЙМЕРА -->
+<div id="timerScreen" class="hidden">
+  <div class="timer-card">
+    <div class="timer-title">Курьер</div>
+
+    <div class="timer-time" id="timerTime">10:00</div>
+
+    <div class="timer-actions">
+      <button id="startTimerBtn" class="timer-btn start">Старт</button>
+      <button id="stopTimerBtn" class="timer-btn stop hidden">Стоп</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <!-- НИЖНЯЯ НАВИГАЦИЯ -->
+  <nav class="bottom-nav">
+    <button id="earnBtn" class="nav-btn active">Заработок</button>
+    <button id="timerBtn" class="nav-btn">Таймер</button>
+  </nav>
+
+</div>
+
+<!-- Модалка дохода -->
+<div class="modal hidden" id="modal">
+  <div class="modal-content">
+    <div class="modal-title">Введите сумму дохода</div>
+    <input type="number" id="amountInput" placeholder="Например: 24734">
+    <div class="modal-actions">
+      <button id="cancelBtn">Отмена</button>
+      <button id="confirmBtn">Подтвердить</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

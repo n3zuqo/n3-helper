@@ -1,0 +1,330 @@
+body {
+  margin: 0;
+  background: #0f0f0f;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+}
+
+#app {
+  padding: 12px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.reset {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.total {
+  margin: 12px 0;
+  font-size: 18px;
+}
+
+.gross {
+  color: #888;
+  font-size: 14px;
+}
+
+.list {
+  margin-bottom: 70px;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #141414;
+  display: flex;
+}
+
+nav button {
+  flex: 1;
+  padding: 14px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+}
+
+.totals {
+  display: flex;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.total-block {
+  flex: 1;
+  background: #161616;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.label {
+  font-size: 12px;
+  color: #888;
+}
+
+.value {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.gross {
+  color: #bbb;
+}
+
+.net {
+  color: #4caf50;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal-content {
+  background: #161616;
+  padding: 16px;
+  border-radius: 12px;
+  width: calc(100% - 32px);
+  max-width: 340px;
+  box-sizing: border-box;
+}
+
+.modal-title {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+#confirmBtn {
+  background: #4caf50;
+  color: #000;
+}
+
+#cancelBtn {
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+.row {
+  background: #161616;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.row.income {
+  color: #4caf50;
+}
+
+.row.expense {
+  color: #f44336;
+}
+
+nav button {
+  cursor: pointer;
+}
+
+.modal-content input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-actions button {
+  flex: 1;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+}
+.bottom-nav {
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  background: #141414;
+  border-radius: 18px;
+  display: flex;
+  padding: 6px;
+  gap: 6px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+}
+
+.nav-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #777;
+  padding: 10px 0;
+  font-size: 13px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-btn.active {
+  background: #222;
+  color: #fff;
+}
+
+.nav-btn:active {
+  transform: scale(0.97);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin: 14px 0 80px;
+}
+
+.action-btn {
+  flex: 1;
+  background: #161616;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
+}
+
+.action-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+}
+
+.action-btn.income {
+  color: #4caf50;
+}
+
+.action-btn.expense {
+  color: #f44336;
+}
+
+.row.timer {
+  color: #9e9e9e;
+  font-style: italic;
+}
+
+/* ===== Таймер ===== */
+
+.timer-card {
+  background: #161616;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+}
+
+.timer-title {
+  font-size: 15px;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+
+.timer-time {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.timer-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.timer-btn {
+  flex: 1;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 0;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.timer-btn:active {
+  transform: scale(0.97);
+}
+
+.timer-btn.start {
+  background: #4caf50;
+  color: #000;
+}
+
+.timer-btn.stop {
+  background: #2a2a2a;
+  color: #f44336;
+}
+
+.reset {
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.reset:active {
+  opacity: 1;
+}
