@@ -328,3 +328,20 @@ nav button {
 .reset:active {
   opacity: 1;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.65),
+      rgba(0, 0, 0, 0.85)
+    ),
+    url("bg/Nezuko-PNG-Images.png");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
